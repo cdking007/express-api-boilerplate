@@ -132,6 +132,17 @@ exports.postPasswordResetNewSet = async (req, res, next) => {
     await user.save();
     res.status(200).send({ status: "success", user });
   } catch (err) {
-    return next(new ApiError("something went wring!", 500));
+    return next(new ApiError("something went wrong!", 500));
   }
 };
+
+exports.postLogoutAll = (req,res,next)=>{
+  try{
+    req.user.tokens = [];
+    await req.user.save();
+    res.status(200).send({status:"success",message:"LOGOUT FROM ALL PLACES SUCCESSFULLY!"});
+
+  }catch(err){
+    return next(new ApiError("Something went wrong!",500));
+  }
+}
