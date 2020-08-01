@@ -6,6 +6,7 @@ const { isAdmin, isCurrentUser } = require("../middlewares/rolesAuth");
 const router = express.Router();
 
 router.get("/users", auth, isAdmin, userController.getUsers);
+router.get("/account", auth, userController.getAccount);
 router.get("/users/:id", auth, isCurrentUser, userController.getUserById);
 router.patch("/users/:id", auth, isCurrentUser, userController.patchUserUpdate);
 
